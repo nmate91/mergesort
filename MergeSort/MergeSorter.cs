@@ -8,6 +8,12 @@ namespace MergeSort
 {
     public class MergeSorter
     {
+        /// <summary>
+        /// Not working with repeating elements in the list, because of the union. For repeating elements, use with List.
+        /// </summary>
+        /// <param name="leftNumbers"></param>
+        /// <param name="rightNumbers"></param>
+        /// <returns></returns>
         public LinkedList<int> Merge(LinkedList<int> leftNumbers, LinkedList<int> rightNumbers)
         {
             if(leftNumbers.Count == 0) { return leftNumbers; }
