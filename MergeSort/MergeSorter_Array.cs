@@ -30,8 +30,22 @@ namespace MergeSort
                     result.Add(right);
                     ++j;
                 }
-                if (i == leftNumbers.Count) { result.Union(leftNumbers); }
-                if (j == rightNumbers.Count) { result.Union(rightNumbers); }
+                if (i == leftNumbers.Count)
+                {
+                    foreach (int item in leftNumbers.Except(leftNumbers.Skip(i)))
+                    {
+                        result.Add(item);
+                    }
+                    break;
+                }
+                if (j == rightNumbers.Count)
+                {
+                    foreach (int item in rightNumbers.Except(rightNumbers.Skip(j)))
+                    {
+                        result.Add(item);
+                    }
+                    break;
+                }
             }
             return result;
         }

@@ -18,14 +18,14 @@ namespace MergeSort
         {
             if(leftNumbers.Count == 0) { return leftNumbers; }
             if(rightNumbers.Count == 0) { return rightNumbers; }
-            LinkedList<int> result = new LinkedList<int> { };
+            LinkedList<int> result = new LinkedList<int>();
             int i = 0;
             int j = 0;
             while (result.Count < (leftNumbers.Count + rightNumbers.Count))
             {
                 int right = rightNumbers.Count > j ? rightNumbers.ElementAt(j) : int.MinValue;
                 int left = leftNumbers.Count > i ? leftNumbers.ElementAt(i) : int.MinValue;
-                if (left > right)
+                if (left < right)
                 {
                     result.AddLast(left);
                     ++i;
@@ -35,8 +35,22 @@ namespace MergeSort
                     result.AddLast(right);
                     ++j;
                 }
-                if(i == leftNumbers.Count) { result.Union(leftNumbers); }
-                if(j == rightNumbers.Count) { result.Union(rightNumbers); }
+                if(i == leftNumbers.Count)
+                {
+                    foreach (int item in leftNumbers)
+                    {
+                        result.AddLast(item);
+                    }
+                    break;
+                }
+                if(j == rightNumbers.Count)
+                {
+                    foreach (int item in rightNumbers)
+                    {
+                        result.AddLast(item);
+                    }
+                    break;
+                }
             }
             return result;
         }
