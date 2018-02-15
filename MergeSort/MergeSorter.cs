@@ -21,11 +21,12 @@ namespace MergeSort
             LinkedList<int> result = new LinkedList<int>();
             int i = 0;
             int j = 0;
-            while (result.Count < (leftNumbers.Count + rightNumbers.Count))
+            int total = leftNumbers.Count + rightNumbers.Count;
+            while (result.Count < total)
             {
-                int right = rightNumbers.Count > j ? rightNumbers.ElementAt(j) : int.MinValue;
-                int left = leftNumbers.Count > i ? leftNumbers.ElementAt(i) : int.MinValue;
-                if (left < right)
+                int right = rightNumbers.Count > j ? rightNumbers.ElementAt(j) : int.MaxValue;
+                int left = leftNumbers.Count > i ? leftNumbers.ElementAt(i) : int.MaxValue;
+                if (left <= right)
                 {
                     result.AddLast(left);
                     ++i;
@@ -35,21 +36,19 @@ namespace MergeSort
                     result.AddLast(right);
                     ++j;
                 }
-                if(i == leftNumbers.Count)
+                if (i == leftNumbers.Count)
                 {
-                    foreach (int item in leftNumbers)
+                    foreach (int item in rightNumbers.Skip(j))
                     {
                         result.AddLast(item);
                     }
-                    break;
                 }
-                if(j == rightNumbers.Count)
+                if (j == rightNumbers.Count)
                 {
-                    foreach (int item in rightNumbers)
+                    foreach (int item in leftNumbers.Skip(i))
                     {
                         result.AddLast(item);
                     }
-                    break;
                 }
             }
             return result;
@@ -57,10 +56,11 @@ namespace MergeSort
 
         public LinkedList<int> Sort(LinkedList<int> numbers)
         {
+            if(numbers.GetType() != typeof(LinkedList<int>)) { throw new ArrayTypeMismatchException(); }
             if(numbers.Count < 2) { return numbers; }
             int middle = (int)(numbers.Count / 2);
             LinkedList<int> rightNumbers = Sort(new LinkedList<int>(numbers.Skip(middle)));
-            LinkedList<int> leftNumbers = Sort(new LinkedList<int>(numbers.Except(rightNumbers)));
+            LinkedList<int> leftNumbers = Sort(new LinkedList<int>(numbers.Take(middle)));
             return Merge(leftNumbers, rightNumbers);
         }
     }
