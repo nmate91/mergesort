@@ -2,13 +2,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TestMergeSort
 {
     [TestClass]
-    public class LinkedListMergeSorter_Tests
+    public class TestLinkedListSorter
     {
-        private MergeSorter sorter;
+        private LinkedListMergeSorter sorter;
+        private LinkedList<int> linkedList;
 
         private readonly int[] array = new int[]
         {
@@ -37,25 +39,26 @@ namespace TestMergeSort
         [TestInitialize]
         public void InitTest()
         {
-            sorter = new MergeSorter();
+            sorter = new LinkedListMergeSorter();
+            linkedList = new LinkedList<int>(array);
         }
 
         [TestMethod]
         public void CheckIfResultNotNull()
         {
-            Assert.AreNotEqual(sorter.Sort(new LinkedList<int>(array)), null);
+            Assert.AreNotEqual(sorter.Sort(linkedList), null);
         }
 
         [TestMethod]
         public void CheckIfResultCountNotChanged()
         {
-            Assert.AreEqual(array.Length, sorter.Sort(new LinkedList<int>(array)).Count);
+            Assert.AreEqual(array.Length, sorter.Sort(linkedList).Count);
         }
 
         [TestMethod]
         public void CheckIfLastElementAtLeastEqualToFirst()
         {
-            var sortedList = sorter.Sort(new LinkedList<int>(array));
+            var sortedList = sorter.Sort(linkedList);
             Assert.IsTrue(sortedList.First.Value < sortedList.Last.Value);
         }
     }
