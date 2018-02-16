@@ -35,17 +35,17 @@ namespace MergeSort
                 if (i == leftNumbers.Count)
                 {
                     IEnumerable<int> numbersLeft = rightNumbers.Skip(j);
-                    foreach (int number in numbersLeft)
+                    foreach (int item in numbersLeft)
                     {
-                        result.Add(number);
+                        result.Add(item);
                     }
                 }
-                if (j == rightNumbers.Count)
+                else if (j == rightNumbers.Count)
                 {
-                    IEnumerable<int> numbersLeft = rightNumbers.Skip(i);
-                    foreach (int number in numbersLeft)
+                    IEnumerable<int> numbersLeft = leftNumbers.Skip(i);
+                    foreach (int item in numbersLeft)
                     {
-                        result.Add(number);
+                        result.Add(item);
                     }
                 }
             }

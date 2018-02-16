@@ -16,7 +16,6 @@ namespace MergeSort
             LinkedList<int> result = new LinkedList<int>();
             int i = 0;
             int j = 0;
-
             while (result.Count < (leftNumbers.Count + rightNumbers.Count))
             {
                 int right = rightNumbers.Count > j ? rightNumbers.ElementAt(j) : int.MaxValue;
@@ -34,17 +33,17 @@ namespace MergeSort
                 if (i == leftNumbers.Count)
                 {
                     IEnumerable<int> numbersLeft = rightNumbers.Skip(j);
-                    foreach (int number in numbersLeft)
+                    foreach (int item in numbersLeft)
                     {
-                        result.AddLast(number);
+                        result.AddLast(item);
                     }
                 }
-                if (j == rightNumbers.Count)
+                else if (j == rightNumbers.Count)
                 {
-                    IEnumerable<int> numbersLeft = rightNumbers.Skip(i);
-                    foreach (int number in numbersLeft)
+                    IEnumerable<int> numbersLeft = leftNumbers.Skip(i);
+                    foreach (int item in numbersLeft)
                     {
-                        result.AddLast(number);
+                        result.AddLast(item);
                     }
                 }
             }
